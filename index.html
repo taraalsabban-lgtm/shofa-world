@@ -271,6 +271,88 @@
     color: var(--ink);
   }
 
+  /* ── Hamburger button (hidden on desktop) ── */
+  .nav-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 17px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: auto;
+    z-index: 1200;
+  }
+  .nav-burger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--silver-bright);
+    border-radius: 2px;
+    transition: transform 0.35s cubic-bezier(.7,0,.3,1), opacity 0.25s ease;
+    transform-origin: center;
+  }
+  .nav-burger.open span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+  .nav-burger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-burger.open span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+
+  /* ── Mobile full-width dropdown menu ── */
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1090;
+    background: rgba(14, 10, 12, 0.96);
+    backdrop-filter: blur(20px) saturate(130%);
+    -webkit-backdrop-filter: blur(20px) saturate(130%);
+    padding: 0;
+    transform: translateY(-100%);
+    transition: transform 0.4s cubic-bezier(.7,0,.3,1);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .nav-mobile-menu.open {
+    transform: translateY(0);
+  }
+  .nav-mobile-menu ul {
+    list-style: none;
+    padding: 5rem 2rem 2rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-mobile-menu ul li {
+    border-bottom: 1px solid rgba(242,240,236,0.08);
+  }
+  .nav-mobile-menu ul li:first-child {
+    border-top: 1px solid rgba(242,240,236,0.08);
+  }
+  .nav-mobile-menu ul li a {
+    display: block;
+    padding: 1.1rem 0;
+    font-family: var(--grotesk);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--silver-bright);
+    text-decoration: none;
+    transition: color 0.25s;
+  }
+  .nav-mobile-menu ul li a:hover { color: var(--silver); }
+  .nav-mobile-menu ul li:last-child { border-bottom: none; }
+
   /* ========== HERO (image grid — clear, unfiltered) ========== */
   .hero {
     min-height: 100vh;
@@ -1396,15 +1478,16 @@
   }
   @media (max-width: 900px) {
     nav {
-      padding: 1rem 1.2rem;
-      grid-template-columns: auto 1fr;
+      padding: 1rem 1.4rem;
+      grid-template-columns: auto 1fr auto;
       gap: 1rem;
     }
     .nav-logo { justify-self: start; }
-    .nav-logo img { width: 120px; }
+    .nav-logo img { width: 110px; }
     .nav-left { display: none; }
-    .nav-right { justify-self: end; gap: 1rem; font-size: 0.68rem; }
-    .nav-right li:first-child { display: none; }
+    .nav-right { display: none; }
+    .nav-burger { display: flex; }
+    .nav-mobile-menu { display: block; }
     .hero {
       padding: 0;
     }
@@ -1806,7 +1889,21 @@
     <li><a href="#" id="your-shofa-btn" class="nav-shofa">Your Shofa</a></li>
     <li><a href="#newsletter" class="nav-cta">Subscribe</a></li>
   </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile-menu" id="nav-mobile-menu" aria-hidden="true">
+  <ul>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#episodes">Episodes</a></li>
+    <li><a href="#host">Host</a></li>
+    <li><a href="#" class="open-shofa-form" id="your-shofa-btn-mobile">Your Shofa</a></li>
+    <li><a href="#newsletter">Subscribe</a></li>
+  </ul>
+</div>
 
 
 <!-- ========= HERO (image-led grid) ========= -->
@@ -2108,6 +2205,44 @@
   window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 80);
   }, { passive: true });
+
+  // ---- Hamburger mobile menu ----
+  (function() {
+    const burger = document.getElementById('nav-burger');
+    const mobileMenu = document.getElementById('nav-mobile-menu');
+
+    function openMenu() {
+      burger.classList.add('open');
+      burger.setAttribute('aria-expanded', 'true');
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    burger.addEventListener('click', function() {
+      burger.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close when any link inside the mobile menu is clicked
+    mobileMenu.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        closeMenu();
+      });
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+    });
+  })();
 
   // ---- Your Shofa Form ----
   document.addEventListener('DOMContentLoaded', function() {
