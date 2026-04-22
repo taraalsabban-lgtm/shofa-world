@@ -407,6 +407,13 @@
     z-index: 1100;
     width: clamp(120px, 16vw, 200px);
     pointer-events: none;
+    padding: 0.6rem 1.4rem 0.5rem;
+    border-radius: 4px;
+    background: radial-gradient(ellipse 110% 180% at 50% 38%, rgba(8,6,7,0) 0%, transparent 100%);
+    transition: background 0.5s ease;
+  }
+  .site-logo.scrolled {
+    background: radial-gradient(ellipse 110% 180% at 50% 38%, rgba(8,6,7,0.52) 0%, transparent 100%);
   }
   .site-logo img {
     width: 100%;
@@ -1826,6 +1833,11 @@
   document.querySelectorAll('.episode').forEach((ep, i) => {
     ep.style.transitionDelay = (i * 0.08) + 's';
   });
+
+  const logoEl = document.getElementById('site-logo');
+  window.addEventListener('scroll', () => {
+    logoEl.classList.toggle('scrolled', window.scrollY > 80);
+  }, { passive: true });
 </script>
 
 </body>
