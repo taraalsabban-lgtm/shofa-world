@@ -61,12 +61,20 @@
   .intro {
     position: fixed;
     inset: 0;
-    background: var(--ink);
+    background: var(--ink) url('/images/intro-bg.jpg') center center / cover no-repeat;
     z-index: 1000;
     display: grid;
     place-items: center;
     transition: opacity 1.2s cubic-bezier(.7,0,.3,1), visibility 1.2s;
   }
+  .intro::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 16, 18, 0.62);
+    pointer-events: none;
+  }
+  .intro-inner { position: relative; z-index: 1; }
   .intro.hidden { opacity: 0; visibility: hidden; }
 
   .intro-inner {
