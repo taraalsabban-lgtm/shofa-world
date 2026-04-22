@@ -482,7 +482,7 @@
 
   .section-label {
     display: grid;
-    grid-template-columns: auto auto 1fr;
+    grid-template-columns: auto 1fr;
     gap: 2rem;
     align-items: center;
     font-size: 0.75rem;
@@ -496,13 +496,7 @@
     margin-right: auto;
   }
   .section-label .num {
-    font-family: var(--display);
-    font-weight: 400;
-    font-size: 1.6rem;
-    letter-spacing: 0.02em;
-    color: var(--silver);
-    text-transform: none;
-    line-height: 1;
+    display: none;
   }
   .section-label .line { height: 1px; background: var(--rule-strong); }
   .section-label .ar {
