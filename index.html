@@ -411,13 +411,19 @@
     z-index: 1100;
     width: clamp(120px, 16vw, 200px);
     pointer-events: none;
-    padding: 0.6rem 1.4rem 0.5rem;
-    border-radius: 4px;
-    background: radial-gradient(ellipse 110% 180% at 50% 38%, rgba(8,6,7,0) 0%, transparent 100%);
-    transition: background 0.5s ease;
+    padding: 0.55rem 1.6rem 0.45rem;
+    border-radius: 60px;
+    background: transparent;
+    border: 1px solid transparent;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition: background 0.45s ease, border-color 0.45s ease, backdrop-filter 0.45s ease;
   }
   .site-logo.scrolled {
-    background: radial-gradient(ellipse 110% 180% at 50% 38%, rgba(8,6,7,0.52) 0%, transparent 100%);
+    background: rgba(14, 10, 12, 0.38);
+    border-color: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(18px) saturate(130%);
+    -webkit-backdrop-filter: blur(18px) saturate(130%);
   }
   .site-logo img {
     width: 100%;
