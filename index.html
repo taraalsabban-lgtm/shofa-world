@@ -252,6 +252,19 @@
     letter-spacing: 0.2em;
     transition: background 0.3s, color 0.3s;
   }
+  .nav-links a.nav-shofa {
+    color: var(--oxblood);
+    border: 1px solid rgba(107,18,32,0.5);
+    padding: 0.55rem 1rem 0.5rem;
+    letter-spacing: 0.2em;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .nav-links a.nav-shofa::after { display: none; }
+  .nav-links a.nav-shofa:hover {
+    background: var(--oxblood);
+    color: var(--cream);
+    border-color: var(--oxblood);
+  }
   .nav-links a.nav-cta::after { display: none; }
   .nav-links a.nav-cta:hover {
     background: var(--silver);
@@ -1584,6 +1597,170 @@
       margin: 0 1rem;
     }
   }
+
+  /* ========== YOUR SHOFA FORM OVERLAY ========== */
+  .sf-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s cubic-bezier(.7,0,.3,1), visibility 0.6s;
+  }
+  .sf-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .sf-bg {
+    position: absolute;
+    inset: 0;
+    background: url('/images/guest-book-bts.jpg') center center / cover no-repeat;
+  }
+  .sf-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(14,10,12,0.72);
+  }
+  .sf-close {
+    position: absolute;
+    top: 2rem;
+    right: 2.5rem;
+    background: none;
+    border: none;
+    color: var(--cream-dim);
+    font-family: var(--grotesk);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s;
+    z-index: 2;
+  }
+  .sf-close:hover { color: var(--cream); }
+  .sf-progress {
+    position: absolute;
+    top: 2.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 2;
+  }
+  .sf-progress-dot {
+    width: 22px;
+    height: 1px;
+    background: rgba(242,240,236,0.25);
+    transition: background 0.4s;
+  }
+  .sf-progress-dot.active { background: var(--cream); }
+  .sf-inner {
+    position: relative;
+    z-index: 2;
+    width: min(540px, 90vw);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .sf-step {
+    display: none;
+    flex-direction: column;
+    gap: 1.6rem;
+    animation: sfFadeIn 0.5s ease forwards;
+  }
+  .sf-step.active { display: flex; }
+  @keyframes sfFadeIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .sf-num {
+    font-family: var(--grotesk);
+    font-size: 0.62rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+  }
+  .sf-question {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    line-height: 1.05;
+    color: var(--cream);
+    margin: 0;
+  }
+  .sf-sub {
+    font-family: var(--grotesk);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--cream-dim);
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .sf-textarea {
+    width: 100%;
+    min-height: 130px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(242,240,236,0.18);
+    border-radius: 0;
+    color: var(--cream);
+    font-family: var(--grotesk);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    padding: 1.1rem 1.2rem;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+  }
+  .sf-textarea::placeholder { color: rgba(242,240,236,0.3); }
+  .sf-textarea:focus { border-color: rgba(242,240,236,0.45); }
+  .sf-btn {
+    align-self: flex-start;
+    background: none;
+    border: 1px solid rgba(242,240,236,0.35);
+    color: var(--cream);
+    font-family: var(--grotesk);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    padding: 0.9rem 2rem;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .sf-btn:hover {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: var(--cream);
+  }
+  .sf-success-msg {
+    display: none;
+    flex-direction: column;
+    gap: 1.2rem;
+    animation: sfFadeIn 0.5s ease forwards;
+  }
+  .sf-success-msg.active { display: flex; }
+  .sf-success-msg h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    color: var(--cream);
+    margin: 0;
+  }
+  .sf-success-msg p {
+    font-family: var(--grotesk);
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+    margin: 0;
+  }
 </style>
 </head>
 <body>
@@ -1606,12 +1783,13 @@
     <li><a href="#listen">Listen</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#episodes">Episodes</a></li>
+    <li><a href="#host">Host</a></li>
   </ul>
   <div class="nav-logo">
     <img src="/images/logo.png" alt="Shofa Podcast">
   </div>
   <ul class="nav-links nav-right">
-    <li><a href="#host">Host</a></li>
+    <li><a href="#" id="your-shofa-btn" class="nav-shofa">Your Shofa</a></li>
     <li><a href="#newsletter" class="nav-cta">Subscribe</a></li>
   </ul>
 </nav>
@@ -1859,16 +2037,14 @@
     <div class="footer-col">
       <h5>Follow</h5>
       <ul>
-        <li><a href="https://www.instagram.com/shofapod/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="https://www.instagram.com/shofapod/">Instagram</a></li>
         <li><a href="#">TikTok</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h5>Inquiries</h5>
       <ul>
-        <li><a href="#">Guest Pitch</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Partnership</a></li>
+        <li><a href="#">Your Shofa</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
     </div>
@@ -1918,7 +2094,128 @@
   window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 80);
   }, { passive: true });
+
+  // ---- Your Shofa Form ----
+  document.addEventListener('DOMContentLoaded', function() {
+  const yourShofaBtn = document.getElementById('your-shofa-btn');
+  const sfOverlay = document.getElementById('sf-overlay');
+  const sfCloseBtn = document.getElementById('sf-close');
+  const sfSteps = document.querySelectorAll('.sf-step');
+  const sfProgressDots = document.querySelectorAll('.sf-progress-dot');
+  const sfNextBtns = document.querySelectorAll('.sf-next-btn');
+  const sfSubmitBtn = document.getElementById('sf-submit-btn');
+  const sfSuccess = document.getElementById('sf-success');
+  let currentStep = 0;
+
+  function openShofa(e) {
+    e.preventDefault();
+    sfOverlay.classList.add('active');
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    showStep(0);
+  }
+
+  function closeShofa() {
+    sfOverlay.classList.remove('active');
+    setTimeout(() => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      resetForm();
+    }, 650);
+  }
+
+  function showStep(idx) {
+    currentStep = idx;
+    sfSteps.forEach((s, i) => {
+      s.classList.toggle('active', i === idx);
+    });
+    sfProgressDots.forEach((d, i) => {
+      d.classList.toggle('active', i <= idx);
+    });
+    sfSuccess.classList.remove('active');
+  }
+
+  function resetForm() {
+    currentStep = 0;
+    sfSteps.forEach(s => s.classList.remove('active'));
+    sfProgressDots.forEach(d => d.classList.remove('active'));
+    sfSuccess.classList.remove('active');
+    document.querySelectorAll('.sf-textarea').forEach(t => t.value = '');
+    sfSteps[0].classList.add('active');
+    sfProgressDots[0].classList.add('active');
+  }
+
+  yourShofaBtn.addEventListener('click', openShofa);
+  sfCloseBtn.addEventListener('click', closeShofa);
+  sfOverlay.addEventListener('click', (e) => {
+    if (e.target === sfOverlay || e.target.classList.contains('sf-bg')) closeShofa();
+  });
+
+  sfNextBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      if (i + 1 < sfSteps.length) showStep(i + 1);
+    });
+  });
+
+  sfSubmitBtn.addEventListener('click', () => {
+    sfSteps.forEach(s => s.classList.remove('active'));
+    sfSuccess.classList.add('active');
+    sfProgressDots.forEach(d => d.classList.add('active'));
+    setTimeout(closeShofa, 2800);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sfOverlay.classList.contains('active')) closeShofa();
+  });
+  }); // end DOMContentLoaded
 </script>
+
+<!-- ========= YOUR SHOFA FORM OVERLAY ========= -->
+<div id="sf-overlay" class="sf-overlay">
+  <div class="sf-bg"></div>
+  <button id="sf-close" class="sf-close">Close ✕</button>
+  <div class="sf-progress">
+    <div class="sf-progress-dot active"></div>
+    <div class="sf-progress-dot"></div>
+    <div class="sf-progress-dot"></div>
+  </div>
+  <div class="sf-inner">
+
+    <!-- Step 1: Your Story -->
+    <div class="sf-step active">
+      <span class="sf-num">01 — Your Story</span>
+      <h2 class="sf-question">Who are you?</h2>
+      <p class="sf-sub">Tell us about yourself — where you're from, what drives you, and what you're building.</p>
+      <textarea class="sf-textarea" placeholder="Begin here..."></textarea>
+      <button class="sf-btn sf-next-btn">Next →</button>
+    </div>
+
+    <!-- Step 2: Your Work -->
+    <div class="sf-step">
+      <span class="sf-num">02 — Your Work</span>
+      <h2 class="sf-question">What do you do?</h2>
+      <p class="sf-sub">Share your work, projects, or a link to your portfolio — anything that shows what you're about.</p>
+      <textarea class="sf-textarea" placeholder="Projects, links, your craft..."></textarea>
+      <button class="sf-btn sf-next-btn">Next →</button>
+    </div>
+
+    <!-- Step 3: Your Socials -->
+    <div class="sf-step">
+      <span class="sf-num">03 — Your Socials</span>
+      <h2 class="sf-question">Where can we find you?</h2>
+      <p class="sf-sub">Your Instagram, LinkedIn, or any platform where you live online.</p>
+      <textarea class="sf-textarea" placeholder="@handle, links, platforms..."></textarea>
+      <button class="sf-btn" id="sf-submit-btn">Submit</button>
+    </div>
+
+    <!-- Success -->
+    <div id="sf-success" class="sf-success-msg">
+      <h2>Thank you.</h2>
+      <p>We'll be in touch.</p>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>
