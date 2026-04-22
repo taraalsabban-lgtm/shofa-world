@@ -101,7 +101,7 @@
   }
 
   .intro-logo {
-    width: clamp(180px, 28vw, 380px);
+    width: clamp(240px, 36vw, 500px);
     height: auto;
     display: block;
     filter: brightness(0) invert(1);
@@ -167,13 +167,18 @@
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
     border-bottom: 1px solid transparent;
-    transition: background 0.45s ease, border-color 0.45s ease, backdrop-filter 0.45s ease;
+    transition: background 0.45s ease, border-color 0.45s ease, backdrop-filter 0.45s ease, opacity 0.5s ease;
   }
   nav.scrolled {
     background: rgba(14, 10, 12, 0.42);
     backdrop-filter: blur(18px) saturate(130%);
     -webkit-backdrop-filter: blur(18px) saturate(130%);
     border-bottom-color: rgba(255, 255, 255, 0.07);
+  }
+  /* Hide entire nav while intro is active */
+  .intro:not(.hidden) + nav {
+    opacity: 0;
+    pointer-events: none;
   }
   /* Nav links hidden until user scrolls */
   .nav-left, .nav-right {
