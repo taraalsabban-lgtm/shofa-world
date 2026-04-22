@@ -91,15 +91,13 @@
     pointer-events: none;
     z-index: 1;
   }
-  .intro-inner { position: relative; z-index: 2; }
-
   .intro-inner {
+    position: relative;
+    z-index: 2;
     text-align: center;
-    padding: 2rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    justify-content: center;
   }
 
   .intro-logo {
@@ -132,6 +130,11 @@
   }
 
   .intro-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1908,10 +1911,10 @@
   <div class="intro-bg"></div>
   <div class="intro-inner">
     <img class="intro-logo" src="/images/logo.png" alt="Shofa Podcast">
-    <div class="intro-hint">
-      <span class="intro-hint-label">Scroll</span>
-      <div class="intro-hint-line"></div>
-    </div>
+  </div>
+  <div class="intro-hint">
+    <span class="intro-hint-label">Scroll</span>
+    <div class="intro-hint-line"></div>
   </div>
 </div>
 
