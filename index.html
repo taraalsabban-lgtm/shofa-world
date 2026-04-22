@@ -818,8 +818,16 @@
     place-items: center;
     transition: all 0.4s cubic-bezier(.7,0,.3,1);
     justify-self: end;
+    text-decoration: none;
   }
-  .ep-play svg { width: 13px; height: 13px; margin-left: 2px; }
+  /* Stretch the anchor to cover the entire episode row */
+  a.ep-play::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  .ep-play svg { width: 13px; height: 13px; margin-left: 2px; position: relative; z-index: 2; }
 
   /* ========== HOST ========== */
   .host {
@@ -1918,7 +1926,7 @@
         </div>
         Now Playing
       </div>
-      <a class="np-card-play" href="https://www.youtube.com/watch?v=4mKMsGj8b4c&t=1s" target="_blank" rel="noopener noreferrer" aria-label="Play latest episode on YouTube">
+      <a class="np-card-play" href="#">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
       </a>
     </div>
@@ -1927,7 +1935,7 @@
     <div class="np-card-meta">
       <span>Aya</span>
       <span class="sep">·</span>
-      <span>58 min</span>
+      <span>1 Hr 24 min</span>
       <span class="sep">·</span>
       <span>Latest Episode</span>
     </div>
@@ -2013,16 +2021,15 @@
   <div class="episodes-list">
     <div class="episode reveal">
       <div class="ep-num-stack">
-        01
-        <span class="sub">EP · 01</span>
+        00
+        <span class="sub">EP · 00</span>
       </div>
       <div class="ep-main">
         <div class="ep-title">On <em>Leaving</em> the Law for the Loud Rooms</div>
         <div class="ep-guest">With Tara AlSabban <span class="ep-guest-ar">تارا</span> · Solo Intro</div>
       </div>
       <div class="ep-meta">
-        <span class="date">April · 26</span><br>
-        42 Min
+        4 Min
       </div>
       <a class="ep-play" href="https://www.youtube.com/watch?v=4mKMsGj8b4c&t=1s" target="_blank" rel="noopener noreferrer" aria-label="Play episode on YouTube">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -2031,16 +2038,15 @@
 
     <div class="episode reveal">
       <div class="ep-num-stack">
-        02
-        <span class="sub">EP · 02</span>
+        01
+        <span class="sub">EP · 01</span>
       </div>
       <div class="ep-main">
         <div class="ep-title">The <em>Arab Eye</em> in a Global Feed</div>
         <div class="ep-guest">With Aya <span class="ep-guest-ar">آية</span></div>
       </div>
       <div class="ep-meta">
-        <span class="date">May · 03</span><br>
-        1 24 Min
+        1 Hr 24 Min
       </div>
       <button class="ep-play" aria-label="Play">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
