@@ -912,6 +912,20 @@
   .guest-track span { padding-right: 3rem; }
   .guest-track .star { color: var(--silver); font-style: normal; }
   @keyframes scroll { to { transform: translateX(-50%); } }
+  @keyframes scroll-rev { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
+  .guest-track-rev {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: scroll-rev 35s linear infinite;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.2vw, 1.9rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .guest-track-rev span { padding-right: 3rem; }
+  .guest-track-rev .star { color: var(--silver); font-style: normal; }
 
   /* ========== EDITORIAL GALLERY (Gucci-style image grid — clear, unfiltered) ========== */
   .gallery {
@@ -1663,6 +1677,14 @@
   </div>
 </section>
 
+
+<!-- ========= GUEST STRIP REVERSE ========= -->
+<div class="guest-strip">
+  <div class="guest-track-rev">
+    <span>should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> </span>
+    <span>should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> should we give our hearts to you? <span class="star">✦</span> </span>
+  </div>
+</div>
 
 <!-- ========= HOST ========= -->
 <section class="section" id="host">
