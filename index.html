@@ -1455,11 +1455,41 @@
       min-height: auto;
     }
     .listen-photo {
-      height: 55vw;
-      max-height: 420px;
+      height: auto;
+      aspect-ratio: 4 / 3;
+    }
+    .listen-photo img {
+      object-fit: contain;
+      object-position: center;
+      background: var(--ink);
     }
     .listen-content {
-      padding: 3.5rem 1.5rem 3rem;
+      padding: 3rem 1.5rem 3rem;
+    }
+    .listen-title {
+      font-size: clamp(2.2rem, 8vw, 3.5rem);
+    }
+    .listen-ar {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .platforms {
+      gap: 0.4rem;
+    }
+    .platform {
+      padding: 1rem 1.2rem;
+      min-height: 52px;
+    }
+    .platform-name {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+    }
+    .platform-sub {
+      font-size: 0.72rem;
+    }
+    .platform-icon {
+      width: 22px;
+      height: 22px;
     }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-brand-blurb { grid-column: 1 / -1; }
@@ -1492,6 +1522,23 @@
     }
     .nav-logo img {
       width: 90px;
+    }
+
+    /* Listen section on small phones */
+    .listen-photo {
+      aspect-ratio: 1 / 1;
+    }
+    .listen-content {
+      padding: 2rem 1.2rem 2.5rem;
+    }
+    .platform {
+      padding: 0.9rem 1rem;
+      gap: 1rem;
+    }
+    .platform-name {
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.2rem;
     }
 
     /* Hero — switch to cover so portrait viewport is filled */
