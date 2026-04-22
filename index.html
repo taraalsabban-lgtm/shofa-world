@@ -541,6 +541,41 @@
     to   { width: 100%; }
   }
 
+  /* Mini YouTube player inside Now Playing card */
+  .np-mini-player {
+    display: none;
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    background: #000;
+    z-index: 10;
+  }
+  .np-mini-player.visible { display: block; }
+  .np-mini-player iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .np-mini-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.7rem;
+    z-index: 11;
+    background: rgba(20,16,18,0.75);
+    color: var(--silver-bright);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background 0.2s;
+  }
+  .np-mini-close:hover { background: rgba(20,16,18,0.95); }
+
   /* Hero byline at very bottom */
   .hero-byline {
     max-width: 1800px;
@@ -1918,17 +1953,23 @@
   </div>
 
   <!-- Now Playing card — glass overlay on hero image -->
-  <div class="now-playing-card">
+  <div class="now-playing-card" id="now-playing-card">
     <div class="np-card-top">
       <div class="np-card-badge">
-        <div class="np-eq">
+        <div class="np-eq" id="np-eq">
           <span></span><span></span><span></span><span></span><span></span>
         </div>
         Now Playing
       </div>
-      <a class="np-card-play" href="https://youtu.be/WJc9CBvBB0M" target="_blank" rel="noopener noreferrer">
+      <button class="np-card-play" id="np-play-btn" aria-label="Play snippet">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-      </a>
+      </button>
+    </div>
+
+    <!-- Mini YouTube player (shown on play) -->
+    <div class="np-mini-player" id="np-mini-player">
+      <button class="np-mini-close" id="np-mini-close" aria-label="Close player">✕</button>
+      <iframe id="np-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen frameborder="0"></iframe>
     </div>
     <span class="np-card-ep">Episode 01</span>
     <h3 class="np-card-title">The <em>Arab Eye</em><br>in a Global Feed</h3>
@@ -2330,6 +2371,32 @@
     if (e.key === 'Escape' && sfOverlay.classList.contains('active')) closeShofa();
   });
   }); // end DOMContentLoaded
+
+  // ---- Now Playing mini player ----
+  (function() {
+    const playBtn   = document.getElementById('np-play-btn');
+    const miniPlayer = document.getElementById('np-mini-player');
+    const closeBtn  = document.getElementById('np-mini-close');
+    const iframe    = document.getElementById('np-yt-iframe');
+    const videoId   = 'WJc9CBvBB0M';
+    const durationSec = 5040; // ~84 min
+
+    function randomStart() {
+      return Math.floor(Math.random() * (durationSec - 120)) + 60;
+    }
+
+    playBtn.addEventListener('click', function() {
+      const start = randomStart();
+      iframe.src = 'https://www.youtube.com/embed/' + videoId +
+                   '?autoplay=1&start=' + start + '&rel=0&modestbranding=1';
+      miniPlayer.classList.add('visible');
+    });
+
+    closeBtn.addEventListener('click', function() {
+      miniPlayer.classList.remove('visible');
+      iframe.src = '';
+    });
+  })();
 </script>
 
 <!-- ========= YOUR SHOFA FORM OVERLAY ========= -->
