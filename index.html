@@ -1079,11 +1079,37 @@
   }
 
   /* ========== LISTEN ========== */
-  .listen-section { text-align: center; }
+  /* Listen section — editorial split */
+  .listen-section {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    gap: 0;
+    padding: 0;
+    align-items: stretch;
+    min-height: 88vh;
+    text-align: left;
+  }
+  .listen-photo {
+    position: relative;
+    overflow: hidden;
+  }
+  .listen-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+  }
+  .listen-content {
+    padding: 6rem 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .listen-title {
     font-family: var(--serif);
     font-weight: 300;
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(2.8rem, 5.5vw, 5.5rem);
     line-height: 1;
     letter-spacing: -0.02em;
     margin-bottom: 1rem;
@@ -1091,59 +1117,58 @@
   .listen-title em { font-style: italic; color: var(--silver); }
   .listen-ar {
     font-family: var(--arabic-display);
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     color: var(--silver);
-    margin-bottom: 4rem;
+    margin-bottom: 3.5rem;
     letter-spacing: 0.02em;
   }
-
   .platforms {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr;
     gap: 0;
-    max-width: 1200px;
-    margin: 0 auto;
     border-top: 1px solid var(--rule-strong);
     border-bottom: 1px solid var(--rule-strong);
   }
   .platform {
-    padding: 3rem 2rem;
+    padding: 1.8rem 0;
     text-align: left;
-    border-right: 1px solid var(--rule);
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
     text-decoration: none;
     color: var(--cream);
     position: relative;
     overflow: hidden;
-    transition: background 0.5s;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: background 0.5s, padding-left 0.35s;
   }
-  .platform:last-child { border-right: none; }
-  .platform:hover { background: var(--oxblood-deep); }
+  .platform:last-child { border-bottom: none; }
+  .platform:hover { background: transparent; padding-left: 0.6rem; }
   .platform-num {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--silver);
-    display: block;
-    margin-bottom: 2rem;
+    min-width: 2rem;
     transition: color 0.3s;
   }
   .platform:hover .platform-num { color: var(--cream); }
   .platform-name {
     font-family: var(--grotesk);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 400;
     line-height: 1;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+    flex: 1;
   }
   .platform-arrow {
-    display: block;
-    margin-top: 3rem;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     transition: transform 0.4s cubic-bezier(.7,0,.3,1);
   }
-  .platform:hover .platform-arrow { transform: translateX(0.5rem) translateY(-0.2rem); }
+  .platform:hover .platform-arrow { transform: translateX(0.4rem) translateY(-0.2rem); }
 
   /* ========== NEWSLETTER ========== */
   .newsletter {
@@ -1395,9 +1420,17 @@
     }
     .ep-meta { display: none; }
     .host { grid-template-columns: 1fr; gap: 2.5rem; }
-    .platforms { grid-template-columns: 1fr 1fr; }
-    .platform:nth-child(2) { border-right: none; }
-    .platform:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+    .listen-section {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+    .listen-photo {
+      height: 55vw;
+      max-height: 420px;
+    }
+    .listen-content {
+      padding: 3.5rem 1.5rem 3rem;
+    }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-brand-blurb { grid-column: 1 / -1; }
     .footer-bottom { flex-direction: column; gap: 1rem; }
@@ -1551,39 +1584,39 @@
 
 <!-- ========= ABOUT ========= -->
 <section class="section listen-section" id="listen">
-  <div class="section-label reveal">
-    <span class="num">(I)</span>
-    <span class="line"></span>
-    <span>Where to Listen <span class="ar">— اسمع</span></span>
+  <div class="listen-photo">
+    <img src="/images/mics-bts.jpg" alt="Tara AlSabban with microphones">
   </div>
+  <div class="listen-content">
+    <div class="section-label reveal">
+      <span class="num">(I)</span>
+      <span class="line"></span>
+      <span>Where to Listen <span class="ar">— اسمع</span></span>
+    </div>
 
-  <h2 class="listen-title reveal">
-    Tune <em>in</em>,<br>
-    wherever you are.
-  </h2>
-  <div class="listen-ar reveal">اسمعنا من أي مكان</div>
+    <h2 class="listen-title reveal">
+      Tune <em>in</em>,<br>
+      wherever you are.
+    </h2>
+    <div class="listen-ar reveal">اسمعنا من أي مكان</div>
 
-  <div class="platforms reveal">
-    <a href="#" class="platform">
-      <span class="platform-num">01</span>
-      <span class="platform-name">Spotify</span>
-      <span class="platform-arrow">↗</span>
-    </a>
-    <a href="#" class="platform">
-      <span class="platform-num">02</span>
-      <span class="platform-name">Apple Pod.</span>
-      <span class="platform-arrow">↗</span>
-    </a>
-    <a href="#" class="platform">
-      <span class="platform-num">03</span>
-      <span class="platform-name">YouTube</span>
-      <span class="platform-arrow">↗</span>
-    </a>
-    <a href="#" class="platform">
-      <span class="platform-num">04</span>
-      <span class="platform-name">RSS Feed</span>
-      <span class="platform-arrow">↗</span>
-    </a>
+    <div class="platforms reveal">
+      <a href="#" class="platform">
+        <span class="platform-num">01</span>
+        <span class="platform-name">Spotify</span>
+        <span class="platform-arrow">↗</span>
+      </a>
+      <a href="#" class="platform">
+        <span class="platform-num">02</span>
+        <span class="platform-name">Apple Podcasts</span>
+        <span class="platform-arrow">↗</span>
+      </a>
+      <a href="#" class="platform">
+        <span class="platform-num">03</span>
+        <span class="platform-name">YouTube</span>
+        <span class="platform-arrow">↗</span>
+      </a>
+    </div>
   </div>
 </section>
 
