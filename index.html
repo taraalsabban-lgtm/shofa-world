@@ -162,14 +162,16 @@
     -webkit-backdrop-filter: blur(18px) saturate(130%);
     border-bottom-color: rgba(255, 255, 255, 0.07);
   }
-  /* Hide nav links while intro is covering the screen */
-  .intro:not(.hidden) + nav .nav-left,
-  .intro:not(.hidden) + nav .nav-right {
+  /* Nav links hidden until user scrolls */
+  .nav-left, .nav-right {
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.45s ease;
   }
-  .nav-left, .nav-right {
-    transition: opacity 0.5s ease;
+  nav.scrolled .nav-left,
+  nav.scrolled .nav-right {
+    opacity: 1;
+    pointer-events: auto;
   }
   .nav-logo {
     justify-self: center;
