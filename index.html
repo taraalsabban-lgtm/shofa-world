@@ -1154,52 +1154,73 @@
     letter-spacing: 0.02em;
   }
   .platforms {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border-top: 1px solid var(--rule-strong);
-    border-bottom: 1px solid var(--rule-strong);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
   }
   .platform {
-    padding: 1.8rem 0;
-    text-align: left;
-    border-right: none;
-    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 1.1rem 1.4rem;
+    border: 1px solid var(--rule-strong);
     text-decoration: none;
     color: var(--cream);
     position: relative;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    transition: background 0.5s, padding-left 0.35s;
+    transition: border-color 0.3s, background 0.3s;
   }
-  .platform:last-child { border-bottom: none; }
-  .platform:hover { background: transparent; padding-left: 0.6rem; }
-  .platform-num {
+  .platform::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--oxblood);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.35s cubic-bezier(.7,0,.3,1);
+  }
+  .platform:hover::before { transform: scaleY(1); }
+  .platform:hover {
+    border-color: rgba(242,240,236,0.25);
+    background: rgba(255,255,255,0.03);
+  }
+  .platform-icon {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .platform:hover .platform-icon { opacity: 1; }
+  .platform-info { flex: 1; }
+  .platform-name {
+    font-family: var(--grotesk);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .platform-sub {
     font-family: var(--serif);
     font-style: italic;
     font-weight: 300;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     color: var(--silver);
-    min-width: 2rem;
-    transition: color 0.3s;
-  }
-  .platform:hover .platform-num { color: var(--cream); }
-  .platform-name {
-    font-family: var(--grotesk);
-    font-size: 1.5rem;
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    flex: 1;
   }
   .platform-arrow {
-    font-size: 1.1rem;
-    transition: transform 0.4s cubic-bezier(.7,0,.3,1);
+    font-size: 0.85rem;
+    opacity: 0.4;
+    transition: transform 0.35s cubic-bezier(.7,0,.3,1), opacity 0.3s;
   }
-  .platform:hover .platform-arrow { transform: translateX(0.4rem) translateY(-0.2rem); }
+  .platform:hover .platform-arrow {
+    transform: translateX(0.3rem) translateY(-0.2rem);
+    opacity: 1;
+  }
 
   /* ========== NEWSLETTER ========== */
   .newsletter {
@@ -1610,18 +1631,33 @@
 
     <div class="platforms reveal">
       <a href="#" class="platform">
-        <span class="platform-num">01</span>
-        <span class="platform-name">Spotify</span>
+        <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 11-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.722a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.779.779 0 11-.453-1.492c3.632-1.102 8.147-.568 11.233 1.329a.78.78 0 01.257 1.072zm.105-2.835C14.692 9.01 9.376 8.832 6.205 9.79a.935.935 0 11-.543-1.79c3.632-1.102 9.68-.889 13.498 1.324a.935.935 0 01-.246 1.543z"/>
+        </svg>
+        <div class="platform-info">
+          <span class="platform-name">Spotify</span>
+          <span class="platform-sub">Stream now</span>
+        </div>
         <span class="platform-arrow">↗</span>
       </a>
       <a href="#" class="platform">
-        <span class="platform-num">02</span>
-        <span class="platform-name">Apple Podcasts</span>
+        <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M5.35 2A3.35 3.35 0 002 5.35v13.3A3.35 3.35 0 005.35 22h13.3A3.35 3.35 0 0022 18.65V5.35A3.35 3.35 0 0018.65 2H5.35zm6.57 2.47a7.55 7.55 0 015.97 12.15 7.27 7.27 0 01-1.59 1.47.47.47 0 01-.65-.12.5.5 0 01.12-.69 6.5 6.5 0 001.38-1.26 6.55 6.55 0 00-5.23-10.56 6.55 6.55 0 00-5.23 10.56 6.5 6.5 0 001.38 1.26.5.5 0 01.12.69.47.47 0 01-.65.12 7.27 7.27 0 01-1.59-1.47A7.55 7.55 0 0111.92 4.47zm0 3.1a4.45 4.45 0 014.45 4.45 4.4 4.4 0 01-1.69 3.47.49.49 0 01-.69-.08.5.5 0 01.08-.7 3.44 3.44 0 001.3-2.69 3.45 3.45 0 00-3.45-3.45 3.45 3.45 0 00-3.45 3.45 3.44 3.44 0 001.3 2.69.5.5 0 01.08.7.49.49 0 01-.69.08 4.4 4.4 0 01-1.69-3.47 4.45 4.45 0 014.45-4.45zm.05 3a1.45 1.45 0 011.44 1.44 1.44 1.44 0 01-.77 1.27v3.25a.67.67 0 01-.67.67.67.67 0 01-.67-.67v-3.25a1.44 1.44 0 01-.77-1.27 1.45 1.45 0 011.44-1.44z"/>
+        </svg>
+        <div class="platform-info">
+          <span class="platform-name">Apple Podcasts</span>
+          <span class="platform-sub">Subscribe free</span>
+        </div>
         <span class="platform-arrow">↗</span>
       </a>
       <a href="#" class="platform">
-        <span class="platform-num">03</span>
-        <span class="platform-name">YouTube</span>
+        <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.582 7.186a2.506 2.506 0 00-1.764-1.764C18.254 5 12 5 12 5s-6.254 0-7.818.422A2.506 2.506 0 002.418 7.186C2 8.75 2 12 2 12s0 3.25.418 4.814a2.506 2.506 0 001.764 1.764C5.746 19 12 19 12 19s6.254 0 7.818-.422a2.506 2.506 0 001.764-1.764C22 15.25 22 12 22 12s0-3.25-.418-4.814zM10 15V9l5.2 3-5.2 3z"/>
+        </svg>
+        <div class="platform-info">
+          <span class="platform-name">YouTube</span>
+          <span class="platform-sub">Watch now</span>
+        </div>
         <span class="platform-arrow">↗</span>
       </a>
     </div>
