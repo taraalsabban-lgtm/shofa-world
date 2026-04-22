@@ -1822,13 +1822,6 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  let introDismissed = false;
-  window.addEventListener('wheel', () => {
-    if (!introDismissed) {
-      document.getElementById('intro').classList.add('hidden');
-      introDismissed = true;
-    }
-  }, { once: true });
 
   document.querySelectorAll('.episode').forEach((ep, i) => {
     ep.style.transitionDelay = (i * 0.08) + 's';
