@@ -1740,6 +1740,20 @@
     color: var(--ink);
     border-color: var(--cream);
   }
+  .sf-btn-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .sf-back-btn {
+    color: var(--cream-dim);
+    border-color: rgba(242,240,236,0.2);
+  }
+  .sf-back-btn:hover {
+    color: var(--cream);
+    border-color: rgba(242,240,236,0.5);
+    background: none;
+  }
   .sf-success-msg {
     display: none;
     flex-direction: column;
@@ -2045,7 +2059,7 @@
     <div class="footer-col">
       <h5>Inquiries</h5>
       <ul>
-        <li><a href="#">Your Shofa</a></li>
+        <li><a href="#" class="open-shofa-form">Your Shofa</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
     </div>
@@ -2104,6 +2118,7 @@
   const sfSteps = document.querySelectorAll('.sf-step');
   const sfProgressDots = document.querySelectorAll('.sf-progress-dot');
   const sfNextBtns = document.querySelectorAll('.sf-next-btn');
+  const sfBackBtns = document.querySelectorAll('.sf-back-btn');
   const sfSubmitBtn = document.getElementById('sf-submit-btn');
   const sfSuccess = document.getElementById('sf-success');
   let currentStep = 0;
@@ -2147,6 +2162,9 @@
   }
 
   yourShofaBtn.addEventListener('click', openShofa);
+  document.querySelectorAll('.open-shofa-form').forEach(el => {
+    el.addEventListener('click', openShofa);
+  });
   sfCloseBtn.addEventListener('click', closeShofa);
   sfOverlay.addEventListener('click', (e) => {
     if (e.target === sfOverlay || e.target.classList.contains('sf-bg')) closeShofa();
@@ -2155,6 +2173,12 @@
   sfNextBtns.forEach((btn, i) => {
     btn.addEventListener('click', () => {
       if (i + 1 < sfSteps.length) showStep(i + 1);
+    });
+  });
+
+  sfBackBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      if (currentStep > 0) showStep(currentStep - 1);
     });
   });
 
@@ -2197,7 +2221,10 @@
       <h2 class="sf-question">What do you do?</h2>
       <p class="sf-sub">Share your work, projects, or a link to your portfolio — anything that shows what you're about.</p>
       <textarea class="sf-textarea" placeholder="Projects, links, your craft..."></textarea>
-      <button class="sf-btn sf-next-btn">Next →</button>
+      <div class="sf-btn-row">
+        <button class="sf-btn sf-back-btn">← Back</button>
+        <button class="sf-btn sf-next-btn">Next →</button>
+      </div>
     </div>
 
     <!-- Step 3: Your Socials -->
@@ -2206,7 +2233,10 @@
       <h2 class="sf-question">Where can we find you?</h2>
       <p class="sf-sub">Your Instagram, LinkedIn, or any platform where you live online.</p>
       <textarea class="sf-textarea" placeholder="@handle, links, platforms..."></textarea>
-      <button class="sf-btn" id="sf-submit-btn">Submit</button>
+      <div class="sf-btn-row">
+        <button class="sf-btn sf-back-btn">← Back</button>
+        <button class="sf-btn" id="sf-submit-btn">Submit</button>
+      </div>
     </div>
 
     <!-- Success -->
