@@ -66,6 +66,7 @@
     display: grid;
     place-items: center;
     transition: opacity 1.2s cubic-bezier(.7,0,.3,1), visibility 1.2s;
+    cursor: pointer;
   }
   .intro.hidden { opacity: 0; visibility: hidden; }
 
@@ -129,26 +130,33 @@
     margin: 0 0.8rem;
   }
 
-  .intro-enter {
-    padding: 0.65rem 2.2rem;
-    background: transparent;
-    border: 1px solid rgba(242, 240, 236, 0.45);
-    color: var(--silver-bright);
-    font-family: var(--grotesk);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    cursor: pointer;
+  .intro-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
     opacity: 0;
-    transition: border-color 0.4s, color 0.4s, letter-spacing 0.35s, transform 0.35s;
-    animation: introFade 0.8s ease 1.4s forwards;
+    animation: introFade 0.8s ease 1.8s forwards;
+    pointer-events: none;
   }
-  .intro-enter:hover {
-    border-color: var(--silver-bright);
-    color: #fff;
-    letter-spacing: 0.42em;
-    transform: translateY(-2px);
+  .intro-hint-label {
+    font-family: var(--grotesk);
+    font-size: 0.58rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: rgba(242,240,236,0.45);
+  }
+  .intro-hint-line {
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, rgba(242,240,236,0.5), transparent);
+    animation: hintDrop 1.6s cubic-bezier(.4,0,.2,1) 2.2s infinite;
+    transform-origin: top;
+  }
+  @keyframes hintDrop {
+    0%  { transform: scaleY(0); opacity: 0; }
+    25% { opacity: 1; }
+    100%{ transform: scaleY(1); opacity: 0; }
   }
 
   @keyframes introFade { to { opacity: 1; } }
@@ -1473,12 +1481,7 @@
       padding: 1.5rem 1.2rem;
       width: 100%;
     }
-    .intro-enter {
-      padding: 0.55rem 1.8rem;
-      width: auto;
-      font-size: 0.68rem;
-      letter-spacing: 0.3em;
-    }
+
     .intro-logo {
       width: clamp(140px, 55vw, 260px);
     }
@@ -1546,7 +1549,10 @@
   <div class="intro-bg"></div>
   <div class="intro-inner">
     <img class="intro-logo" src="/images/logo.png" alt="Shofa Podcast">
-    <button class="intro-enter" onclick="document.getElementById('intro').classList.add('hidden')">Come Inside</button>
+    <div class="intro-hint">
+      <span class="intro-hint-label">Scroll or click</span>
+      <div class="intro-hint-line"></div>
+    </div>
   </div>
 </div>
 
@@ -1843,6 +1849,14 @@
 </footer>
 
 <script>
+  const introEl = document.getElementById('intro');
+  function dismissIntro() {
+    introEl.classList.add('hidden');
+  }
+  introEl.addEventListener('click', dismissIntro);
+  window.addEventListener('wheel', dismissIntro, { once: true });
+  window.addEventListener('touchmove', dismissIntro, { once: true, passive: true });
+
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
