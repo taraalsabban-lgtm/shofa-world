@@ -62,11 +62,12 @@
     position: fixed;
     inset: 0;
     background: var(--ink);
-    z-index: 1000;
+    z-index: 1200;
     display: grid;
     place-items: center;
     transition: opacity 1.2s cubic-bezier(.7,0,.3,1), visibility 1.2s;
     cursor: pointer;
+    overflow: hidden;
   }
   .intro.hidden { opacity: 0; visibility: hidden; }
 
@@ -1897,8 +1898,18 @@
 
 <script>
   const introEl = document.getElementById('intro');
+
+  // Lock page scroll while intro is visible
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
+
   function dismissIntro() {
     introEl.classList.add('hidden');
+    // Restore scroll after transition
+    setTimeout(() => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }, 1250);
   }
   introEl.addEventListener('click', dismissIntro);
   window.addEventListener('wheel', dismissIntro, { once: true });
