@@ -246,11 +246,11 @@
   .nav-links a:hover::after { width: 100%; }
 
   .nav-links a.nav-cta {
-    color: var(--ink);
-    background: var(--silver-bright);
-    padding: 0.55rem 1rem 0.5rem;
-    letter-spacing: 0.2em;
-    transition: background 0.3s, color 0.3s;
+    color: var(--silver-bright);
+    background: none;
+    padding-bottom: 3px;
+    letter-spacing: 0.25em;
+    transition: color 0.3s;
   }
   .nav-links a.nav-shofa {
     color: var(--silver-bright);
@@ -265,11 +265,7 @@
     background: var(--silver-bright);
     color: var(--ink);
   }
-  .nav-links a.nav-cta::after { display: none; }
-  .nav-links a.nav-cta:hover {
-    background: var(--silver);
-    color: var(--ink);
-  }
+  .nav-links a.nav-cta:hover { color: var(--silver); }
 
   /* ── Hamburger button (hidden on desktop) ── */
   .nav-burger {
