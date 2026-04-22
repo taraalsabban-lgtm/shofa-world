@@ -253,17 +253,18 @@
     transition: background 0.3s, color 0.3s;
   }
   .nav-links a.nav-shofa {
-    color: var(--oxblood);
-    border: 1px solid rgba(107,18,32,0.5);
+    color: var(--cream);
+    background: var(--oxblood);
     padding: 0.55rem 1rem 0.5rem;
     letter-spacing: 0.2em;
-    transition: background 0.3s, color 0.3s, border-color 0.3s;
+    transition: background 0.3s, color 0.3s, opacity 0.3s;
+    opacity: 0.92;
   }
   .nav-links a.nav-shofa::after { display: none; }
   .nav-links a.nav-shofa:hover {
-    background: var(--oxblood);
+    background: #8a1829;
     color: var(--cream);
-    border-color: var(--oxblood);
+    opacity: 1;
   }
   .nav-links a.nav-cta::after { display: none; }
   .nav-links a.nav-cta:hover {
@@ -2004,7 +2005,7 @@
 
 <!-- ========= EPISODES ========= -->
 
-<section class="section">
+<section class="section" id="newsletter">
   <div class="newsletter">
     <h2 class="newsletter-title reveal">
       Letters from <em>the Founder.</em>
