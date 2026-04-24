@@ -2342,12 +2342,12 @@
     sfProgressDots[0].classList.add('active');
   }
 
-  yourShofaBtn.addEventListener('click', openShofa);
+  if (yourShofaBtn) yourShofaBtn.addEventListener('click', openShofa);
   document.querySelectorAll('.open-shofa-form').forEach(el => {
     el.addEventListener('click', openShofa);
   });
-  sfCloseBtn.addEventListener('click', closeShofa);
-  sfOverlay.addEventListener('click', (e) => {
+  if (sfCloseBtn) sfCloseBtn.addEventListener('click', closeShofa);
+  if (sfOverlay) sfOverlay.addEventListener('click', (e) => {
     if (e.target === sfOverlay || e.target.classList.contains('sf-bg')) closeShofa();
   });
 
@@ -2363,7 +2363,7 @@
     });
   });
 
-  sfSubmitBtn.addEventListener('click', () => {
+  if (sfSubmitBtn) sfSubmitBtn.addEventListener('click', () => {
     sfSteps.forEach(s => s.classList.remove('active'));
     sfSuccess.classList.add('active');
     sfProgressDots.forEach(d => d.classList.add('active'));
