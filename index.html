@@ -547,25 +547,30 @@
   /* Mini YouTube player inside Now Playing card */
   .np-mini-player {
     display: none;
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    overflow: hidden;
+    position: fixed;
+    bottom: 5rem;
+    left: 2rem;
+    width: min(420px, calc(100vw - 2rem));
+    aspect-ratio: 16 / 9;
     background: #000;
-    z-index: 10;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.7);
+    z-index: 2000;
   }
   .np-mini-player.visible { display: block; }
   .np-mini-player iframe {
     width: 100%;
     height: 100%;
     display: block;
+    border: none;
   }
   .np-mini-close {
     position: absolute;
-    top: 0.6rem;
-    right: 0.7rem;
-    z-index: 11;
-    background: rgba(20,16,18,0.75);
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 2001;
+    background: rgba(20,16,18,0.85);
     color: var(--silver-bright);
     border: none;
     border-radius: 50%;
@@ -577,7 +582,7 @@
     place-items: center;
     transition: background 0.2s;
   }
-  .np-mini-close:hover { background: rgba(20,16,18,0.95); }
+  .np-mini-close:hover { background: rgba(20,16,18,1); }
 
   /* Hero byline at very bottom */
   .hero-byline {
@@ -1969,11 +1974,6 @@
       </button>
     </div>
 
-    <!-- Mini YouTube player (shown on play) -->
-    <div class="np-mini-player" id="np-mini-player">
-      <button class="np-mini-close" id="np-mini-close" aria-label="Close player">✕</button>
-      <iframe id="np-yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen frameborder="0"></iframe>
-    </div>
     <span class="np-card-ep">Episode 01</span>
     <h3 class="np-card-title">Founder of <em>Archif</em></h3>
     <div class="np-card-meta">
@@ -2401,6 +2401,12 @@
     });
   })();
 </script>
+
+<!-- ========= NOW PLAYING MINI PLAYER (fixed floating) ========= -->
+<div class="np-mini-player" id="np-mini-player">
+  <button class="np-mini-close" id="np-mini-close" aria-label="Close player">✕</button>
+  <iframe id="np-yt-iframe" src="" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 <!-- ========= YOUR SHOFA FORM OVERLAY ========= -->
 <div id="sf-overlay" class="sf-overlay">
