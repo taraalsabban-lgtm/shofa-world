@@ -2418,21 +2418,17 @@
     });
   });
 
-  if (sfSubmitBtn) sfSubmitBtn.addEventListener('click', () => {
-    const textareas = document.querySelectorAll('.sf-textarea');
+  const sfForm = document.getElementById('sf-form');
+  if (sfForm) sfForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!sfSubmitBtn) return;
     sfSubmitBtn.textContent = 'Sending…';
     sfSubmitBtn.disabled = true;
-
-    const formData = new FormData();
-    formData.append('your-story',   textareas[0] ? textareas[0].value : '');
-    formData.append('your-work',    textareas[1] ? textareas[1].value : '');
-    formData.append('your-heart',   textareas[2] ? textareas[2].value : '');
-    formData.append('your-socials', textareas[3] ? textareas[3].value : '');
 
     fetch('https://formspree.io/f/xrernjzy', {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
-      body: formData
+      body: new FormData(sfForm)
     })
     .then(res => res.json().then(json => ({ ok: res.ok, json })))
     .then(({ ok, json }) => {
@@ -2537,7 +2533,7 @@
     <div class="sf-progress-dot"></div>
     <div class="sf-progress-dot"></div>
   </div>
-  <div class="sf-inner">
+  <form class="sf-inner" id="sf-form" action="https://formspree.io/f/xrernjzy" method="POST">
 
     <!-- Step 1: Your Story -->
     <div class="sf-step active">
@@ -2545,7 +2541,7 @@
       <h2 class="sf-question">Who are you?</h2>
       <p class="sf-sub">Tell us about yourself or the guest you are pitching. What drives you? What makes you, you?</p>
       <textarea class="sf-textarea" name="your-story" placeholder="Begin here..."></textarea>
-      <button class="sf-btn sf-next-btn">Next →</button>
+      <button type="button" class="sf-btn sf-next-btn">Next →</button>
     </div>
 
     <!-- Step 2: Your Work -->
@@ -2555,8 +2551,8 @@
       <p class="sf-sub">Share your work, projects, or a link to your portfolio. Anything that shows what you're about.</p>
       <textarea class="sf-textarea" name="your-work" placeholder="Projects, links, your craft..."></textarea>
       <div class="sf-btn-row">
-        <button class="sf-btn sf-back-btn">← Back</button>
-        <button class="sf-btn sf-next-btn">Next →</button>
+        <button type="button" class="sf-btn sf-back-btn">← Back</button>
+        <button type="button" class="sf-btn sf-next-btn">Next →</button>
       </div>
     </div>
 
@@ -2567,8 +2563,8 @@
       <p class="sf-sub">Tell us a bit about why you want to come on our show.</p>
       <textarea class="sf-textarea" name="your-heart" placeholder="Projects, links, your craft..."></textarea>
       <div class="sf-btn-row">
-        <button class="sf-btn sf-back-btn">← Back</button>
-        <button class="sf-btn sf-next-btn">Next →</button>
+        <button type="button" class="sf-btn sf-back-btn">← Back</button>
+        <button type="button" class="sf-btn sf-next-btn">Next →</button>
       </div>
     </div>
 
@@ -2579,8 +2575,8 @@
       <p class="sf-sub">Your Instagram, LinkedIn, or any platform where you live online.</p>
       <textarea class="sf-textarea" name="your-socials" placeholder="@handle, links, platforms..."></textarea>
       <div class="sf-btn-row">
-        <button class="sf-btn sf-back-btn">← Back</button>
-        <button class="sf-btn" id="sf-submit-btn">Submit</button>
+        <button type="button" class="sf-btn sf-back-btn">← Back</button>
+        <button type="submit" class="sf-btn" id="sf-submit-btn">Submit</button>
       </div>
     </div>
 
@@ -2590,7 +2586,7 @@
       <p>We'll be in touch.</p>
     </div>
 
-  </div>
+  </form>
 </div>
 
 </body>
