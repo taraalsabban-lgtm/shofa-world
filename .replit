@@ -36,4 +36,4 @@ externalPort = 80
 [deployment]
 deploymentTarget = "static"
 run = ["python", "server.py"]
-publicDir = "."
+publicDir = "public"
