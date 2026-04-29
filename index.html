@@ -2420,33 +2420,35 @@
 
   if (sfSubmitBtn) sfSubmitBtn.addEventListener('click', () => {
     const textareas = document.querySelectorAll('.sf-textarea');
-    const data = {
-      'Your Story':   textareas[0] ? textareas[0].value : '',
-      'Your Work':    textareas[1] ? textareas[1].value : '',
-      'Your Heart':   textareas[2] ? textareas[2].value : '',
-      'Your Socials': textareas[3] ? textareas[3].value : ''
-    };
-
     sfSubmitBtn.textContent = 'Sending…';
     sfSubmitBtn.disabled = true;
 
+    const formData = new FormData();
+    formData.append('your-story',   textareas[0] ? textareas[0].value : '');
+    formData.append('your-work',    textareas[1] ? textareas[1].value : '');
+    formData.append('your-heart',   textareas[2] ? textareas[2].value : '');
+    formData.append('your-socials', textareas[3] ? textareas[3].value : '');
+
     fetch('https://formspree.io/f/xrernjzy', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data)
+      headers: { 'Accept': 'application/json' },
+      body: formData
     })
-    .then(res => {
-      if (res.ok) {
+    .then(res => res.json().then(json => ({ ok: res.ok, json })))
+    .then(({ ok, json }) => {
+      if (ok) {
         sfSteps.forEach(s => s.classList.remove('active'));
         sfSuccess.classList.add('active');
         sfProgressDots.forEach(d => d.classList.add('active'));
         setTimeout(closeShofa, 3000);
       } else {
+        console.error('Formspree error:', json);
         sfSubmitBtn.textContent = 'Something went wrong — try again';
         sfSubmitBtn.disabled = false;
       }
     })
-    .catch(() => {
+    .catch(err => {
+      console.error('Submission failed:', err);
       sfSubmitBtn.textContent = 'Something went wrong — try again';
       sfSubmitBtn.disabled = false;
     });
