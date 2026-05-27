@@ -2427,6 +2427,8 @@
   if (sfForm) sfForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!sfSubmitBtn) return;
+    const gotcha = sfForm.querySelector('input[name="_gotcha"]');
+    if (gotcha && gotcha.value) return;
     sfSubmitBtn.textContent = 'Sending…';
     sfSubmitBtn.disabled = true;
 
@@ -2498,6 +2500,8 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      const gotcha = form.querySelector('input[name="_gotcha"]');
+      if (gotcha && gotcha.value) return;
       btn.textContent = 'Sending…';
       btn.disabled = true;
 
