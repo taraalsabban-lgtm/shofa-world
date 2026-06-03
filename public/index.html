@@ -2441,7 +2441,7 @@
     sfSubmitBtn.textContent = 'Sending…';
     sfSubmitBtn.disabled = true;
 
-    fetch('/api/submit/shofa', {
+    fetch('https://formspree.io/f/mbdqnwga', {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
       body: new FormData(sfForm)
@@ -2520,7 +2520,7 @@
       btn.textContent = 'Sending…';
       btn.disabled = true;
 
-      fetch('/api/submit/newsletter', {
+      fetch('https://formspree.io/f/mgorgdkv', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: new FormData(form)
