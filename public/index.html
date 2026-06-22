@@ -8,7 +8,6 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
 <!-- Cloudflare Turnstile CAPTCHA — replace data-sitekey with your real key from dash.cloudflare.com/turnstile -->
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;600&family=Rakkas&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -2234,7 +2233,6 @@
     <form class="newsletter-form reveal" id="newsletter-form">
       <input type="email" name="email" id="newsletter-email" placeholder="your.email@somewhere.com" required>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none!important;position:absolute;left:-9999px;width:1px;height:1px;" aria-hidden="true">
-      <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" data-size="compact" style="margin:8px 0;"></div>
       <button type="submit" id="newsletter-btn">Subscribe →</button>
     </form>
   </div>
@@ -2431,13 +2429,7 @@
     e.preventDefault();
     if (!sfSubmitBtn) return;
     const gotcha = sfForm.querySelector('input[name="_gotcha"]');
-    if (gotcha && gotcha.value) return;
-    const turnstileToken = sfForm.querySelector('[name="cf-turnstile-response"]');
-    if (!turnstileToken || !turnstileToken.value) {
-      sfSubmitBtn.textContent = 'Please complete the check above';
-      setTimeout(() => { sfSubmitBtn.textContent = 'Submit'; }, 2500);
-      return;
-    }
+
     sfSubmitBtn.textContent = 'Sending…';
     sfSubmitBtn.disabled = true;
 
@@ -2510,13 +2502,7 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       const gotcha = form.querySelector('input[name="_gotcha"]');
-      if (gotcha && gotcha.value) return;
-      const turnstileToken = form.querySelector('[name="cf-turnstile-response"]');
-      if (!turnstileToken || !turnstileToken.value) {
-        btn.textContent = 'Please complete the check above';
-        setTimeout(() => { btn.textContent = 'Subscribe →'; btn.disabled = false; }, 2500);
-        return;
-      }
+
       btn.textContent = 'Sending…';
       btn.disabled = true;
 
@@ -2599,7 +2585,6 @@
       <h2 class="sf-question">Where can we find you?</h2>
       <p class="sf-sub">Your Instagram, LinkedIn, or any platform where you live online.</p>
       <textarea class="sf-textarea" name="your-socials" placeholder="@handle, links, platforms..."></textarea>
-      <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" style="margin:16px 0;"></div>
       <div class="sf-btn-row">
         <button type="button" class="sf-btn sf-back-btn">← Back</button>
         <button type="submit" class="sf-btn" id="sf-submit-btn">Submit</button>
